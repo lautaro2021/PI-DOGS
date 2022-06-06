@@ -1,4 +1,4 @@
-import {GET_ALL_DOGS, GET_ALL_TEMPERAMENTS, GET_ALL_DETAILS, GET_NAMES, FILTER_BY_NAME, FILTER_BY_TEMPERAMENT, ORDER_BY_NAME, ORDER_BY_WEIGHT, POST_DOG} from '../actions/index.js';
+import {GET_ALL_DOGS, GET_ALL_TEMPERAMENTS, GET_ALL_DETAILS, GET_NAMES, FILTER_BY_NAME, FILTER_BY_TEMPERAMENT, ORDER_BY_NAME, ORDER_BY_WEIGHT, POST_DOG, CLEAN_UP_DETAIL} from '../actions/index.js';
 
 const initialState = {
     dogs: [],
@@ -25,6 +25,11 @@ function rootReducer (state = initialState, action){
                 ...state,
                 details: action.payload
                 }
+        case CLEAN_UP_DETAIL:
+            return{
+                ...state,
+                details: action.payload
+            }
         case GET_NAMES:
             return{
                 ...state,

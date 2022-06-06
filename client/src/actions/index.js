@@ -8,6 +8,7 @@ export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const GET_NAMES = "GET_NAMES";
 export const POST_DOG = "POST_DOG";
+export const CLEAN_UP_DETAIL = "CLEAN_UP_DETAIL";
 
 
 export function getAllDogs() {
@@ -88,6 +89,13 @@ export function orderByWeight(payload) {
     return {
         type: ORDER_BY_WEIGHT,
         payload
+    }
+}
+
+export function cleanUpDetails(){
+    return{
+        type: 'CLEAN_UP_DETAIL',
+        payload: []
     }
 }
 
