@@ -243,6 +243,7 @@ export const StyledHome = styled.div `
     .h1{
         font-family: 'Helvetica';
         text-align: center;
+        margin-right: 5%;
     }
 
     #ON .h1{

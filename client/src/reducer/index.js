@@ -40,6 +40,7 @@ function rootReducer (state = initialState, action){
             if(statusFilter){
                 var dogsFiltered = allDogs.filter(d => d.name == action.payload)
             }
+
             return{
                 ...state,
                 dogs: dogsFiltered

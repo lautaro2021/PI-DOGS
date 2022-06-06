@@ -19,7 +19,8 @@ const getDogs = async (req, res, next) => {
               })
             };
           })
-          dogsByName.length ? res.status(200).json(dogsByName) : res.status(404).json('Dog name not found');
+          
+          dogsByName.length ? res.status(200).json(dogsByName) : res.json("Dog not found");
         }else{
           return res.json(dogs);
         }
