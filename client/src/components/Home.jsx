@@ -61,19 +61,26 @@ export default function Home() {
   }
 
   //ordenamiento por nombre
+  //evaluo el tipo de dato para que no rompa al intentar filtrar despues de una busqueda sin resultados
   function handleOrderByName(e) {
     e.preventDefault(e);
-    setCurrentPage(1); //seteo mi currentePage en la inicial
-    dispatch(orderByName(e.target.value));
-    setOrder(`Ordenated ${e.target.value}`); //creo un state local que me permita renderizar el ordenamiento
+    if(typeof currentDogs != 'string'){
+      setCurrentPage(1); //seteo mi currentePage en la inicial
+      dispatch(orderByName(e.target.value));
+      setOrder(`Ordenated ${e.target.value}`); //creo un state local que me permita renderizar el ordenamiento
+      console.log(currentDogs)
+    }
   }
 
   //ordenamiento por peso
+  //evaluo el tipo de dato para que no rompa al intentar filtrar despues de una busqueda sin resultados
   function handleOrderByWeight(e) {
     e.preventDefault(e);
-    setCurrentPage(1);
-    dispatch(orderByWeight(e.target.value));
-    setOrderWeight(`Ordenated ${e.target.value}`);
+    if(typeof currentDogs != 'string'){
+      setCurrentPage(1);
+      dispatch(orderByWeight(e.target.value));
+      setOrderWeight(`Ordenated ${e.target.value}`);
+    }
   }
 
   //modo oscuro
@@ -180,12 +187,16 @@ export default function Home() {
           </div>
         </div>
       {/* paginado */}
+      {typeof currentDogs != 'string' ?
       <Paginado
       dogsPerPage={dogsPerPage}
       allDogs={allDogs.length}
       paginado={paginado}
       toggle={light}
-      />  
+      /> 
+      : "" 
+      }
+      
     </div>
     </StyledHome>
   );

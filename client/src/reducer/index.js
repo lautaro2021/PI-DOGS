@@ -66,24 +66,25 @@ function rootReducer (state = initialState, action){
             }
         case ORDER_BY_NAME:
             let sortedArr = action.payload === 'nameAsc' ? 
-                state.dogs.sort(function(a, b) {
+                typeof state.dogs != 'string' && state.dogs.sort(function(a, b) {
                     if(a.name.toLowerCase() > b.name.toLowerCase()) return 1;
                     if(b.name.toLowerCase() > a.name.toLowerCase()) return -1;
                     return 0;
                 }) :
-                state.dogs.sort(function(a, b) {
+                typeof state.dogs != 'string' && state.dogs.sort(function(a, b) {
                     if(a.name.toLowerCase() > b.name.toLowerCase()) return -1;
                     if(b.name.toLowerCase() > a.name.toLowerCase()) return 1;
                     return 0;
                 })
+
             return {
                 ...state,
-                dogs: sortedArr,
+                dogs: sortedArr
             }
         case ORDER_BY_WEIGHT:
             //pusheo spliteado
             let b = [];
-            state.dogs.forEach(d => {
+            state.dogs?.forEach(d => {
                 b.push({
                     ...d,
                     "weight": d.weight.split(" - ")
