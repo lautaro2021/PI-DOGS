@@ -18,7 +18,7 @@ function validate(input) {
   if (!input.name) errors.name = "Name cannot be null";
   // else if (!input.temperaments.length)
   //   errors.temperaments = "Please, select at least one temperament";
-  else if (!input.heightMax || input.heightMax < 0)
+  else if (!input.heightMax || input.heightMax < 0 || input.heightMax > 100)
     errors.heightMax = "Please set correct Max Height";
   else if (
     !input.heightMin ||
@@ -26,7 +26,7 @@ function validate(input) {
     input.heightMin >= input.heightMax
   )
     errors.heightMin = "Please set correct Min Height";
-  else if (!input.weightMax || input.weightMax < 0)
+  else if (!input.weightMax || input.weightMax < 0 || input.weightMax > 100)
     errors.weightMax = "Please set correct Max Weight";
   else if (
     !input.weightMin ||
