@@ -179,6 +179,7 @@ function DogCreate() {
                       name="heightMax"
                       onChange={(e) => handleChange(e)}
                       min="0"
+                      max="100"
                     ></input>
                   </div>
                   <div className="height">
@@ -190,6 +191,7 @@ function DogCreate() {
                       name="heightMin"
                       onChange={(e) => handleChange(e)}
                       min="0"
+                      max="100"
                     ></input>
                   </div>
                   <div className="weight">
@@ -201,6 +203,7 @@ function DogCreate() {
                       name="weightMax"
                       onChange={(e) => handleChange(e)}
                       min="0"
+                      max="100"
                     ></input>
                   </div>
                   <div className="weight">
@@ -212,6 +215,7 @@ function DogCreate() {
                       name="weightMin"
                       onChange={(e) => handleChange(e)}
                       min="0"
+                      max="100"
                     ></input>
                   </div>
                   <div className="lifes">
@@ -223,6 +227,7 @@ function DogCreate() {
                       name="life_spanMax"
                       onChange={(e) => handleChange(e)}
                       min="0"
+                      max="100"
                     ></input>
                   </div>
                   <div className="lifes">
@@ -234,6 +239,7 @@ function DogCreate() {
                       name="life_spanMin"
                       onChange={(e) => handleChange(e)}
                       min="0"
+                      max="100"
                     ></input>
                   </div>
                   <div className="img">
