@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 import { StyledPaginate } from "./styles/StyledPaginate";
 
@@ -15,7 +15,8 @@ function Paginado({ dogsPerPage, allDogs, paginado, toggle }) {
 
   return (
     <StyledPaginate>
-      {toggle == "OFF" ? <div className="conteiner_div_paginado">
+      {toggle == "OFF" ? 
+        <div className="conteiner_div_paginado">
         <ul className="ul_paginado">
           {/* renderizo las paginas */}
           {pageNumbers?.map((n) => (

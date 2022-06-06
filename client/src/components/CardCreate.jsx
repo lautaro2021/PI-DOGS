@@ -16,8 +16,8 @@ function validate(input) {
   let errors = {};
   let urlValidator = /^(ftp|http|https):\/\/[^ "]+$/;
   if (!input.name) errors.name = "Name cannot be null";
-  else if (!input.temperaments.length)
-    errors.temperaments = "Please, select at least one temperament";
+  // else if (!input.temperaments.length)
+  //   errors.temperaments = "Please, select at least one temperament";
   else if (!input.heightMax || input.heightMax < 0)
     errors.heightMax = "Please set correct Max Height";
   else if (
@@ -46,6 +46,11 @@ function DogCreate() {
   const [errors, setErrors] = useState({});
   let temps = [];
 
+  useEffect(() => {
+    dispatch(getAllTemperaments());
+  }, []);
+
+
   //creo el form
   const [input, setInput] = useState({
     name: "",
@@ -68,6 +73,13 @@ function DogCreate() {
     life_span: `${input.life_spanMin} - ${input.life_spanMax}`,
     temperaments: input.temperaments,
   };
+
+  input.temperaments.forEach((t) => {
+    temperaments.map((tt) => {
+      if (t === tt.id) temps.push(tt.name);
+    });
+  });
+
 
   //creo un handle que apunte al name del input y modifique mi state
   function handleChange(e) {
@@ -94,8 +106,27 @@ function DogCreate() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(postDog(jsonDog));
-    alert("Dog created!");
+    if(input.temperaments.length){
+      dispatch(postDog(jsonDog));
+      alert("Dog created!");
+      setInput({
+        name: "",
+        heightMax: "",
+        heightMin: "",
+        weightMax: "",
+        weightMin: "",
+        life_spanMax: "",
+        life_spanMin: "",
+        image: "",
+        temperaments: [],
+      });
+      //redirecciono al usuario al home
+      navigate("/home");
+    }else alert("Please select almost one temperament")
+  }
+
+  function handleRefresh(e){
+    e.preventDefault();
     setInput({
       name: "",
       heightMax: "",
@@ -106,20 +137,8 @@ function DogCreate() {
       life_spanMin: "",
       image: "",
       temperaments: [],
-    });
-    //redirecciono al usuario al home
-    navigate("/home");
+    })
   }
-
-  useEffect(() => {
-    dispatch(getAllTemperaments());
-  }, []);
-
-  input.temperaments.forEach((t) => {
-    temperaments.map((tt) => {
-      if (t === tt.id) temps.push(tt.name);
-    });
-  });
 
   return (
     <StyledCreate>
@@ -129,7 +148,7 @@ function DogCreate() {
             <button>Return</button>
           </Link>
           <button
-            onClick={() => window.location.reload()}
+            onClick={(e) => handleRefresh(e)}
             className="header_createButton"
           >
             Refresh
@@ -230,6 +249,7 @@ function DogCreate() {
                   <div className="temperament">
                     <label>Temperament*: </label>
                     <select onChange={(e) => handleTemperaments(e)}>
+                      <option hidden>Select almost one</option>
                       {temperaments?.map((t) => (
                         <option key={t.id} value={t.id}>
                           {t.name}
@@ -254,7 +274,7 @@ function DogCreate() {
                     {errors.weightMax && <p>{errors.weightMax}</p>}
                     {errors.weightMin && <p>{errors.weightMin}</p>}
                     {errors.image && <p>{errors.image}</p>}
-                    {errors.temperaments && <p>{errors.temperaments}</p>}
+                    {/* {errors.temperaments && <p>{errors.temperaments}</p>} */}
                   </div>
                 </div>
               )}

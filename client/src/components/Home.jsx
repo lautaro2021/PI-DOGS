@@ -32,6 +32,12 @@ export default function Home() {
   const indexOfFirstDog = indexOfLastDog - dogsPerPage; //determino la posicion del primero
   const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog); //guardo los perros a renderizar por pagina
 
+  const rounded = Math.ceil(allDogs.length / dogsPerPage);
+
+  if(currentPage != 1 && currentPage > rounded){
+    setCurrentPage(rounded)
+  }
+
   //Ordenamiento
   const [order, setOrder] = useState("");
   const [orderWeight, setOrderWeight] = useState("");
@@ -187,14 +193,14 @@ export default function Home() {
           </div>
         </div>
       {/* paginado */}
-      {typeof currentDogs != 'string' ?
+      {typeof allDogs != 'string' ?
       <Paginado
       dogsPerPage={dogsPerPage}
       allDogs={allDogs.length}
       paginado={paginado}
       toggle={light}
       /> 
-      : "" 
+      : ""
       }
       
     </div>

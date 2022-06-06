@@ -1,4 +1,4 @@
-import {GET_ALL_DOGS, GET_ALL_TEMPERAMENTS, GET_ALL_DETAILS, GET_NAMES, FILTER_BY_NAME, FILTER_BY_TEMPERAMENT, ORDER_BY_NAME, ORDER_BY_WEIGHT, POST_DOG, CLEAN_UP_DETAIL} from '../actions/index.js';
+import {GET_ALL_DOGS, GET_ALL_TEMPERAMENTS, GET_ALL_DETAILS, GET_NAMES, FILTER_BY_NAME, FILTER_BY_TEMPERAMENT, ORDER_BY_NAME, ORDER_BY_WEIGHT, POST_DOG, CLEAN_UP_DETAIL, CLEAN_UP} from '../actions/index.js';
 
 const initialState = {
     dogs: [],
@@ -45,7 +45,6 @@ function rootReducer (state = initialState, action){
             if(statusFilter){
                 var dogsFiltered = allDogs.filter(d => d.name == action.payload)
             }
-
             return{
                 ...state,
                 dogs: dogsFiltered
@@ -71,12 +70,12 @@ function rootReducer (state = initialState, action){
             }
         case ORDER_BY_NAME:
             let sortedArr = action.payload === 'nameAsc' ? 
-                typeof state.dogs != 'string' && state.dogs.sort(function(a, b) {
+                state.dogs.sort(function(a, b) {
                     if(a.name.toLowerCase() > b.name.toLowerCase()) return 1;
                     if(b.name.toLowerCase() > a.name.toLowerCase()) return -1;
                     return 0;
                 }) :
-                typeof state.dogs != 'string' && state.dogs.sort(function(a, b) {
+                state.dogs.sort(function(a, b) {
                     if(a.name.toLowerCase() > b.name.toLowerCase()) return -1;
                     if(b.name.toLowerCase() > a.name.toLowerCase()) return 1;
                     return 0;
@@ -89,7 +88,7 @@ function rootReducer (state = initialState, action){
         case ORDER_BY_WEIGHT:
             //pusheo spliteado
             let b = [];
-            state.dogs?.forEach(d => {
+            state.dogs.forEach(d => {
                 b.push({
                     ...d,
                     "weight": d.weight.split(" - ")
