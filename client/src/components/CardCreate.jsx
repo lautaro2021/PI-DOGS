@@ -18,19 +18,19 @@ function validate(input) {
   if (!input.name) errors.name = "Name cannot be null";
   // else if (!input.temperaments.length)
   //   errors.temperaments = "Please, select at least one temperament";
-  else if (!input.heightMax || input.heightMax < 0 || input.heightMax > 100)
+  else if (!input.heightMax || input.heightMax < 1 || input.heightMax > 100)
     errors.heightMax = "Please set correct Max Height";
   else if (
     !input.heightMin ||
-    input.heightMin < 0 ||
+    input.heightMin < 1 ||
     input.heightMin >= input.heightMax
   )
     errors.heightMin = "Please set correct Min Height";
-  else if (!input.weightMax || input.weightMax < 0 || input.weightMax > 100)
+  else if (!input.weightMax || input.weightMax < 1 || input.weightMax > 100)
     errors.weightMax = "Please set correct Max Weight";
   else if (
     !input.weightMin ||
-    input.weightMin < 0 ||
+    input.weightMin < 1 ||
     input.weightMin >= input.weightMax
   )
     errors.weightMin = "Please set correct Min Weight";
@@ -76,7 +76,7 @@ function DogCreate() {
 
   input.temperaments.forEach((t) => {
     temperaments.map((tt) => {
-      if (t === tt.id) temps.push(tt.name);
+      if (t === tt.id && !temps.includes(tt.name)) temps.push(tt.name);
     });
   });
 
@@ -100,7 +100,7 @@ function DogCreate() {
     e.preventDefault();
     setInput({
       ...input,
-      temperaments: [...input.temperaments, e.target.value],
+      temperaments: [...input.temperaments, !input.temperaments.includes(e.target.value) && e.target.value],
     });
   }
 
@@ -178,7 +178,7 @@ function DogCreate() {
                       value={input.heightMax}
                       name="heightMax"
                       onChange={(e) => handleChange(e)}
-                      min="0"
+                      min="1"
                       max="100"
                     ></input>
                   </div>
@@ -190,7 +190,7 @@ function DogCreate() {
                       value={input.heightMin}
                       name="heightMin"
                       onChange={(e) => handleChange(e)}
-                      min="0"
+                      min="1"
                       max="100"
                     ></input>
                   </div>
@@ -202,7 +202,7 @@ function DogCreate() {
                       value={input.weightMax}
                       name="weightMax"
                       onChange={(e) => handleChange(e)}
-                      min="0"
+                      min="1"
                       max="100"
                     ></input>
                   </div>
@@ -214,7 +214,7 @@ function DogCreate() {
                       value={input.weightMin}
                       name="weightMin"
                       onChange={(e) => handleChange(e)}
-                      min="0"
+                      min="1"
                       max="100"
                     ></input>
                   </div>
@@ -226,7 +226,7 @@ function DogCreate() {
                       value={input.life_spanMax}
                       name="life_spanMax"
                       onChange={(e) => handleChange(e)}
-                      min="0"
+                      min="1"
                       max="100"
                     ></input>
                   </div>
@@ -238,7 +238,7 @@ function DogCreate() {
                       value={input.life_spanMin}
                       name="life_spanMin"
                       onChange={(e) => handleChange(e)}
-                      min="0"
+                      min="1"
                       max="100"
                     ></input>
                   </div>
