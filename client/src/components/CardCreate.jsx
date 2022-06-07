@@ -15,22 +15,22 @@ import { StyledCreate } from "./styles/StyledCreate";
 function validate(input) {
   let errors = {};
   let urlValidator = /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
-  if (!input.name) errors.name = "Name cannot be null";
-  else if (!input.heightMax || input.heightMax < 1 || input.heightMax > 100)
-    errors.heightMax = "Please set correct Max Height";
-  else if ( !input.heightMin || input.heightMin < 1 || Number(input.heightMin) >= Number(input.heightMax))
-    errors.heightMin = "Please set correct Min Height";
-  else if (!input.weightMax || input.weightMax < 1 || input.weightMax > 100)
-    errors.weightMax = "Please set correct Max Weight";
-  else if (!input.weightMin || input.weightMin < 1 || Number(input.weightMin) >= Number(input.weightMax))
-    errors.weightMin = "Please set correct Min Weight";
-  else if (input.life_spanMax && (input.life_spanMax < 1 || input.life_spanMax > 100))
-    errors.life_spanMax = "Please set correct Max Life Span";
-  else if (input.life_spanMax &&  (input.life_spanMin < 1 || Number(input.life_spanMin) >= Number(input.life_spanMax)))
-    errors.life_spanMin = "Please set correct Min Life Span";
-  else if (!input.image || urlValidator.test(input.image) == false) errors.image = "Image cannot be null or incorrect (png, gif, jpg)";
-
-  return errors;
+    if (!input.name) errors.name = "Name cannot be null";
+    else if (!input.heightMax || input.heightMax < 1 || input.heightMax > 100)
+      errors.heightMax = "Please set correct Max Height";
+    else if ( !input.heightMin || input.heightMin < 1 || Number(input.heightMin) >= Number(input.heightMax))
+      errors.heightMin = "Please set correct Min Height";
+    else if (!input.weightMax || input.weightMax < 1 || input.weightMax > 100)
+      errors.weightMax = "Please set correct Max Weight";
+    else if (!input.weightMin || input.weightMin < 1 || Number(input.weightMin) >= Number(input.weightMax))
+      errors.weightMin = "Please set correct Min Weight";
+    else if (input.life_spanMax || input.life_spanMin && (input.life_spanMax < 1 || input.life_spanMax > 100))
+      errors.life_spanMax = "Please set correct Max Life Span";
+    else if (input.life_spanMax &&  (input.life_spanMin < 1 || Number(input.life_spanMin) >= Number(input.life_spanMax)))
+      errors.life_spanMin = "Please set correct Min Life Span";
+    else if (!input.image || urlValidator.test(input.image) == false) errors.image = "Image cannot be null or incorrect (png, gif, jpg)";
+  
+    return errors;
 }
 
 function DogCreate() {
