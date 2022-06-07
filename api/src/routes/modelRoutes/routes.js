@@ -89,9 +89,25 @@ const getAndCreateTemps = async (req, res, next) => {
     }
 }
 
+const deleteDog = async(req, res, next) => {
+  try {
+      const id = req.params.idRaza;
+      console.log(id)
+      if(id){
+        await Dog.destroy({
+          where: {id}
+        })
+        return res.send("Dog deleted successfully")
+      }
+  } catch (error) {
+      next(error);
+  }
+}
+
   module.exports = {
       getDogs,
       getDogsById,
       createDog,
-      getAndCreateTemps
+      getAndCreateTemps,
+      deleteDog,
   }

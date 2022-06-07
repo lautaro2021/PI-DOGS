@@ -336,8 +336,8 @@ export const StyledCreate = styled.div`
     }
 
     .li_img{
-        margin-top: 45px;
-        margin-left: 15px;
+        margin-top: 5%;
+        margin-left: 1%;
         list-style: none;
         width: 42.5vh;
         height: 30vh; 

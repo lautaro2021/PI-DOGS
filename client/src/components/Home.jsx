@@ -22,8 +22,9 @@ export default function Home() {
   const allEveryDog = useSelector((state) => state.allDogs);
   const allTemperaments = useSelector((state) => state.temperaments);
 
-  const arr = [];
-  allTemperaments.forEach((t) => arr.push(t));
+  //razas condicionadas por temp seleccionado
+  const [tempSelected, setTempSelected] = useState("");
+  const conditionalNames = [];
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1); //pagina actual (arranca en 1)
@@ -31,11 +32,9 @@ export default function Home() {
   const indexOfLastDog = currentPage * dogsPerPage; //determino la posicion del ultimo
   const indexOfFirstDog = indexOfLastDog - dogsPerPage; //determino la posicion del primero
   const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog); //guardo los perros a renderizar por pagina
-
   const rounded = Math.ceil(allDogs.length / dogsPerPage);
-
-  if(currentPage != 1 && currentPage > rounded){
-    setCurrentPage(rounded)
+  if(currentPage !== 1 && currentPage > rounded){
+    setCurrentPage(1)
   }
 
   //Ordenamiento
@@ -68,9 +67,27 @@ export default function Home() {
     e.preventDefault(e);
     if(typeof currentDogs != 'string'){
       dispatch(filterTemperament(e.target.value));
+      setTempSelected(e.target.value);
     }
   }
+  const arr = [];
+  allTemperaments.forEach((t) => arr.push(t));
+  
+  if(tempSelected){
+    allEveryDog.forEach(d => {
+      typeof d.temperaments === 'string' ?
+      d.temperaments.includes(tempSelected) && conditionalNames.push(d)
+      :
+      d.temperaments && d.temperaments.map(dd => {
+        dd.name && dd.name.includes(tempSelected) && conditionalNames.push(d)
+      })
+    })
+  }
 
+  console.log(allEveryDog);
+  console.log(conditionalNames);
+
+ 
   //ordenamiento por nombre
   //evaluo el tipo de dato para que no rompa al intentar filtrar despues de una busqueda sin resultados
   function handleOrderByName(e) {
@@ -79,7 +96,6 @@ export default function Home() {
       setCurrentPage(1); //seteo mi currentePage en la inicial
       dispatch(orderByName(e.target.value));
       setOrder(`Ordenated ${e.target.value}`); //creo un state local que me permita renderizar el ordenamiento
-      console.log(currentDogs)
     }
   }
 
@@ -94,7 +110,7 @@ export default function Home() {
     }
   }
 
-  //modo oscuro
+  //modo obscuro
   const [light, setLight] = useState("OFF")
   function handleLight(e){
     e.preventDefault(e);
@@ -129,19 +145,24 @@ export default function Home() {
             </select>
             </div>
             {/* filtrado por raza */}
-            <select onChange={(e) => handleFilterName(e)} className = "header_orderButtons">
+            <select onChange={(e) => handleFilterName(e)} className = "header_orderButtons2" id={light}>
               <option hidden>Razes</option>
-              {allEveryDog ? (
-                allEveryDog.map((d) => {
-                  return (
+              {conditionalNames.length ? (
+                conditionalNames.map((d) => (
                     <option key={d.name} value={d.name}>
                       {d.name}
                     </option>
-                  );
-                })
-              ) : (
-                <h1>Not Results Found</h1>
-              )}
+                  )
+                )
+              ) 
+              : 
+              allEveryDog && allEveryDog.map((d) => (
+                <option key={d.name} value={d.name}>
+                  {d.name}
+                </option>
+              )
+            )
+              }
             </select>
             {/* filtrado por temperamento */}
             <select onChange={(e) => handleFilterTemperament(e)} className = "header_orderButtons">

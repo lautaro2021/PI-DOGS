@@ -1,7 +1,7 @@
-import { Link, useParams,} from "react-router-dom";
+import { Link, useParams, useNavigate} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect} from "react";
-import { getAllDetails, cleanUpDetails } from "../actions/index";
+import { getAllDetails, cleanUpDetails, deleteDog } from "../actions/index";
 import Loader from "./Loader";
 import iso from "../images/Details/iso.png";
 import dog from '../images/Card/dog.png';
@@ -15,6 +15,7 @@ function CardDetail() {
   const dogs = useSelector((state) => state.details);
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const temps = [];
 
   useEffect(() => {
@@ -30,9 +31,11 @@ function CardDetail() {
     }
   });
 
-  function handleClick(e){
+  function handleDelete(e){
       e.preventDefault(e);
-      alert("Thanks for all watching my FullStack Proyect!")
+      dispatch(deleteDog(e.target.value));
+      alert("Dog deleted successfully")
+      navigate("/home");
   }
 
   return (
@@ -42,7 +45,7 @@ function CardDetail() {
           <button className="header_button">Go Home</button>
         </Link>
         <img src={iso} className="header_iso"></img>
-        <button className="details_h1" onClick={e => handleClick(e)}>Click me!</button>
+        <button className="details_h1" value={id} onClick={e => handleDelete(e)}>DELETE</button>
       </div>
       <div className="body_detail">
         {!dogs.length ? (

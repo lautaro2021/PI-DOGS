@@ -2,7 +2,6 @@ import React from 'react';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import { getNames } from '../actions';
-import hueso from '../images/hueso.png'
 
 import {StyledSearchBar} from './styles/StyledSearchBar'
 

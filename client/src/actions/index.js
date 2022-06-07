@@ -9,6 +9,7 @@ export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const GET_NAMES = "GET_NAMES";
 export const POST_DOG = "POST_DOG";
 export const CLEAN_UP_DETAIL = "CLEAN_UP_DETAIL";
+export const DELETE_DOG = "DELETE_DOG";
 
 
 export function getAllDogs() {
@@ -51,6 +52,17 @@ export function getAllDetails(id){
         try {
             let res = await axios.get(`/dogs/${id}`)
             dispatch({type: GET_ALL_DETAILS, payload: res.data})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export function deleteDog(id){
+    return async(dispatch) => {
+        try {
+            let res = await axios.delete(`/delete/${id}`)
+            dispatch({type: DELETE_DOG, payload: res.data})
         } catch (error) {
             console.log(error)
         }

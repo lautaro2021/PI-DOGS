@@ -12,7 +12,7 @@ function Paginado({ dogsPerPage, allDogs, paginado, toggle }) {
 
   return (
     <StyledPaginate>
-      {toggle == "OFF" ? 
+      {toggle === "OFF" ? 
         <div className="conteiner_div_paginado">
         <ul className="ul_paginado">
           {/* renderizo las paginas */}

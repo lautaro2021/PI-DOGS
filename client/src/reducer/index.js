@@ -1,4 +1,4 @@
-import {GET_ALL_DOGS, GET_ALL_TEMPERAMENTS, GET_ALL_DETAILS, GET_NAMES, FILTER_BY_NAME, FILTER_BY_TEMPERAMENT, ORDER_BY_NAME, ORDER_BY_WEIGHT, POST_DOG, CLEAN_UP_DETAIL, CLEAN_UP} from '../actions/index.js';
+import {GET_ALL_DOGS, GET_ALL_TEMPERAMENTS, GET_ALL_DETAILS, GET_NAMES, FILTER_BY_NAME, FILTER_BY_TEMPERAMENT, ORDER_BY_NAME, ORDER_BY_WEIGHT, POST_DOG, CLEAN_UP_DETAIL, DELETE_DOG} from '../actions/index.js';
 
 const initialState = {
     dogs: [],
@@ -110,7 +110,7 @@ function rootReducer (state = initialState, action){
                if(d.weight[0]) e.push({...d})
             })
             let status = action.payload
-            if(status == 'weightAsc'){
+            if(status === 'weightAsc'){
                 e.sort(function(a, b){
                     if(Number(a.weight[0]) > Number(b.weight[0])) return 1;
                     else if(Number(b.weight[0]) > Number(a.weight[0])) return -1;
@@ -139,6 +139,16 @@ function rootReducer (state = initialState, action){
             return {
                 ...state,
                 dogs: f
+            }
+        case DELETE_DOG:
+            const statusP = action.payload;
+            let filtered = [];
+            if(statusP){
+                filtered = state.dogs.filter(d => d.id !== statusP)
+            }
+            return{
+                ...state,
+                dogs: filtered
             }
         default: return state;
     }

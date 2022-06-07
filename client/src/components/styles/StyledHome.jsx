@@ -236,6 +236,66 @@ export const StyledHome = styled.div `
         }
     }
 
+    .header_orderButtons2{
+        display: inline-block;
+        padding: 10px 5px;
+        font-size: 15px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: black;
+        background-color: #faebd7;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+        font-family: 'Helvetica';
+        font-weight: bold;
+        transition: 0.1s;
+        width: 280px;
+
+        &:hover{
+            background-color: #A0522D;
+            color: white;
+        }
+
+        &:active{
+            background-color: #A0522D;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+    }
+
+    #ON .header_orderButtons2{
+        display: inline-block;
+        padding: 10px 5px;
+        font-size: 15px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: white;
+        background-color: #444;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+        font-family: 'Helvetica';
+        font-weight: bold;
+        transition: 0.1s;
+
+        &:hover{
+            background-color: #A0522D;
+            color: white;
+        }
+
+        &:active{
+            background-color: #A0522D;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+    }
+
+
     .header_orderButtons option{
         font-family: 'Helvetica';
     }
