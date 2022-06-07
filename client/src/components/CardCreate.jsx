@@ -14,7 +14,7 @@ import { StyledCreate } from "./styles/StyledCreate";
 //validacion
 function validate(input) {
   let errors = {};
-  let urlValidator = /^(ftp|http|https):\/\/[^ "]+$/;
+  let urlValidator = /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
   if (!input.name) errors.name = "Name cannot be null";
   // else if (!input.temperaments.length)
   //   errors.temperaments = "Please, select at least one temperament";
@@ -28,9 +28,9 @@ function validate(input) {
     errors.weightMin = "Please set correct Min Weight";
   else if (input.life_spanMax && (input.life_spanMax < 1 || input.life_spanMax > 100))
     errors.life_spanMax = "Please set correct Max Life Span";
-  else if (input.life_spanMin && (input.life_spanMin < 1 || Number(input.life_spanMin) > Number(input.life_spanMax)))
+  else if (input.life_spanMin && (input.life_spanMin < 1 || Number(input.life_spanMin) >= Number(input.life_spanMax)))
     errors.life_spanMin = "Please set correct Min Life Span";
-  else if (!input.image || urlValidator.test(input.image) == false) errors.image = "Image cannot be null or incorrect";
+  else if (!input.image || urlValidator.test(input.image) == false) errors.image = "Image cannot be null or incorrect (png, gif, jpg)";
 
   return errors;
 }

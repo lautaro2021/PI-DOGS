@@ -43,7 +43,7 @@ function rootReducer (state = initialState, action){
             const allDogs = state.allDogs;
             const statusFilter = action.payload
             if(statusFilter){
-                var dogsFiltered = allDogs.filter(d => d.name == action.payload)
+                var dogsFiltered = allDogs.filter(d => d.name === action.payload)
             }
             return{
                 ...state,
@@ -98,7 +98,7 @@ function rootReducer (state = initialState, action){
             let c = [];
             b.forEach(d => {
                 if(d.weight[0] !== 'NaN') c.push({...d})
-                else if(d.weight[0] == 'NaN'){
+                else if(d.weight[0] === 'NaN'){
                     c.push({
                        ...d,
                        "weight": [d.weight[1]]
@@ -114,7 +114,7 @@ function rootReducer (state = initialState, action){
                 e.sort(function(a, b){
                     if(Number(a.weight[0]) > Number(b.weight[0])) return 1;
                     else if(Number(b.weight[0]) > Number(a.weight[0])) return -1;
-                    else if(Number(a.weight[0]) == Number(b.weight[0])) {
+                    else if(Number(a.weight[0]) === Number(b.weight[0])) {
                         if(Number(a.weight[1]) > Number(b.weight[1])) return 1;
                         else if(Number(b.weight[1]) > Number(a.weight[1])) return -1;
                         return 0;
@@ -123,7 +123,7 @@ function rootReducer (state = initialState, action){
             }else e.sort(function(a, b){
                 if(Number(a.weight[0]) > Number(b.weight[0])) return -1;
                 else if(Number(b.weight[0]) > Number(a.weight[0])) return 1;
-                else if(Number(a.weight[0]) == Number(b.weight[0])) {
+                else if(Number(a.weight[0]) === Number(b.weight[0])) {
                     if(Number(a.weight[1]) > Number(b.weight[1])) return -1;
                     else if(Number(b.weight[1]) > Number(a.weight[1])) return 1;
                     return 0;

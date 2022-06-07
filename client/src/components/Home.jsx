@@ -57,13 +57,18 @@ export default function Home() {
   //filtrado por nombre
   function handleFilterName(e) {
     e.preventDefault(e);
-    dispatch(filterName(e.target.value)); //tomo el value del input
+    if(typeof currentDogs != 'string'){
+      dispatch(filterName(e.target.value)); //tomo el value del input
+    }
+    
   }
 
   //filtrado por temperamento
   function handleFilterTemperament(e) {
     e.preventDefault(e);
-    dispatch(filterTemperament(e.target.value));
+    if(typeof currentDogs != 'string'){
+      dispatch(filterTemperament(e.target.value));
+    }
   }
 
   //ordenamiento por nombre
@@ -112,13 +117,13 @@ export default function Home() {
             {/* ordenamiento por nombre */}
             <div className = "container_order">
             <select onChange={(e) => handleOrderByName(e)} className = "header_orderButtons" id={light}>
-              <option hidden>Order Name</option>
+              <option hidden>Order by Name</option>
               <option value="nameAsc">Asc</option>
               <option value="nameDesc">Desc</option>
             </select>
             {/* ordenamiento por peso */}
             <select onChange={(e) => handleOrderByWeight(e)} className = "header_orderButtons">
-              <option hidden>Order Weight</option>
+              <option hidden>Order by Weight</option>
               <option value="weightAsc">Asc</option>
               <option value="weightDsc">Desc</option>
             </select>
