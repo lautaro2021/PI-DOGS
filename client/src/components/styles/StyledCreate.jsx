@@ -160,6 +160,7 @@ export const StyledCreate = styled.div`
         height: 50px;
         line-height: 50px;
         border-radius: 15px;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     }
 
     .name{
@@ -335,6 +336,8 @@ export const StyledCreate = styled.div`
     }
 
     .li_img{
+        margin-top: 45px;
+        margin-left: 15px;
         list-style: none;
         width: 42.5vh;
         height: 30vh; 
