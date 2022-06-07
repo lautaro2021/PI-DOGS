@@ -47,7 +47,7 @@ function CardDetail() {
           <button className="header_button">Go Home</button>
         </Link>
         <img src={iso} className="header_iso"></img>
-        <button className="details_h1" value={id} onClick={e => handleDelete(e)}>DELETE</button>
+        <button className="details_h1" value={id} onClick={e => handleDelete(e)}>Delete Dog</button>
       </div>
       <div className="body_detail">
         {!dogs.length ? (
