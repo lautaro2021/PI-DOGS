@@ -99,10 +99,3 @@ export function cleanUpDetails(){
     }
 }
 
-export function cleanUp(){
-    return{
-        type: 'CLEAN_UP',
-        payload: []
-    }
-}
-

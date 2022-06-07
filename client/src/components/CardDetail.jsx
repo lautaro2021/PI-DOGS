@@ -18,7 +18,8 @@ function CardDetail() {
   const temps = [];
 
   useEffect(() => {
-    dispatch(getAllDetails(id));
+    dispatch(getAllDetails(id))
+    return () => dispatch(cleanUpDetails())
   }, [dispatch, id]);
 
   dogs.map((d) => {
@@ -34,15 +35,11 @@ function CardDetail() {
       alert("Thanks for all watching my FullStack Proyect!")
   }
 
-  function handleClear(e){
-    dispatch(cleanUpDetails())
-  }
-
   return (
     <StyledDetail>
       <div className="header_detail">
         <Link to="/home">
-          <button className="header_button" onClick = {e => handleClear(e)}>Go Home</button>
+          <button className="header_button">Go Home</button>
         </Link>
         <img src={iso} className="header_iso"></img>
         <button className="details_h1" onClick={e => handleClick(e)}>Click me!</button>
