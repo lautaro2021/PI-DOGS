@@ -33,9 +33,11 @@ function CardDetail() {
 
   function handleDelete(e){
       e.preventDefault(e);
-      dispatch(deleteDog(e.target.value));
-      alert("Dog deleted successfully")
-      navigate("/home");
+      if(id.includes("-")){
+        dispatch(deleteDog(e.target.value));
+        alert("Dog deleted successfully")
+        navigate("/home");
+      }else alert("Cannot delete API dogs")
   }
 
   return (
