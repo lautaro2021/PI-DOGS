@@ -66,7 +66,7 @@ function DogCreate() {
     weight: `${input.weightMin} - ${input.weightMax}`,
     height: `${input.heightMin} - ${input.heightMax}`,
     image: input.image,
-    life_span: `${input.life_spanMin} - ${input.life_spanMax}`,
+    life_span: `${input.life_spanMin} - ${input.life_spanMax} years`,
     temperaments: input.temperaments,
   };
 

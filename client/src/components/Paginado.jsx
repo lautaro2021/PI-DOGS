@@ -2,9 +2,6 @@ import React from "react";
 
 import { StyledPaginate } from "./styles/StyledPaginate";
 
-
-
-
 function Paginado({ dogsPerPage, allDogs, paginado, toggle }) {
   const pageNumbers = []; // -> armo un arreglo con cada uno de los numeros de pagina
   const rounded = Math.ceil(allDogs / dogsPerPage); // --> determino la cantidad de paginas
