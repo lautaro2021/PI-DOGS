@@ -40,6 +40,7 @@ export default function Home() {
   const indexOfLastDog = currentPage * dogsPerPage; //determino la posicion del ultimo
   const indexOfFirstDog = indexOfLastDog - dogsPerPage; //determino la posicion del primero
   const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog); //guardo los perros a renderizar por pagina
+  
   const rounded = Math.ceil(allDogs.length / dogsPerPage);
   if(currentPage !== 1 && currentPage > rounded){
     setCurrentPage(1)

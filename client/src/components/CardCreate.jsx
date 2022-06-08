@@ -13,21 +13,21 @@ import { StyledCreate } from "./styles/StyledCreate";
 
 //validacion
 function validate(input) {
-  let errors = {};
+  var errors = {};
   let urlValidator = /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
     if (!input.name) errors.name = "Name cannot be null";
     else if (!input.heightMax || input.heightMax < 1 || input.heightMax > 100)
-      errors.heightMax = "Please set correct Max Height";
+      errors.heightMax = "Please set correct Max Height (max 100)";
     else if (!input.heightMin || input.heightMin < 1 || Number(input.heightMin) >= Number(input.heightMax))
-      errors.heightMin = "Please set correct Min Height";
+      errors.heightMin = "Please set correct Min Height (max 100)";
     else if (!input.weightMax || input.weightMax < 1 || input.weightMax > 100)
-      errors.weightMax = "Please set correct Max Weight";
+      errors.weightMax = "Please set correct Max Weight (max 100)";
     else if (!input.weightMin || input.weightMin < 1 || Number(input.weightMin) >= Number(input.weightMax))
-      errors.weightMin = "Please set correct Min Weight";
+      errors.weightMin = "Please set correct Min Weight (max 100)";
     else if (input.life_spanMax && (!input.life_spanMin ||input.life_spanMax < 1 || input.life_spanMax > 100))
-      errors.life_spanMax = "Please set correct Max and Min Life Span";
+      errors.life_spanMax = "Please set correct Max and Min Life Span (max 50)";
     else if (input.life_spanMin && (!input.life_spanMax ||input.life_spanMin < 1 || Number(input.life_spanMin) >= Number(input.life_spanMax)))
-      errors.life_spanMin = "Please set correct Min and Max Life Span";
+      errors.life_spanMin = "Please set correct Min and Max Life Span (max 50)";
     else if (!input.image || urlValidator.test(input.image) == false) errors.image = "Image cannot be null or incorrect (png, gif, jpg)";
   
     return errors;
@@ -233,7 +233,7 @@ function DogCreate() {
                       name="life_spanMax"
                       onChange={(e) => handleChange(e)}
                       min="1"
-                      max="100"
+                      max="50"
                     ></input>
                   </div>
                   <div className="lifes">
@@ -245,7 +245,7 @@ function DogCreate() {
                       name="life_spanMin"
                       onChange={(e) => handleChange(e)}
                       min="1"
-                      max="100"
+                      max="50"
                     ></input>
                   </div>
                   <div className="img">
