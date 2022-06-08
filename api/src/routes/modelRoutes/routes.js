@@ -92,7 +92,6 @@ const getAndCreateTemps = async (req, res, next) => {
 const deleteDog = async(req, res, next) => {
   try {
       const id = req.params.idRaza;
-      console.log(id)
       if(id){
         await Dog.destroy({
           where: {id}

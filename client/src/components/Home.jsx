@@ -22,9 +22,17 @@ export default function Home() {
   const allEveryDog = useSelector((state) => state.allDogs);
   const allTemperaments = useSelector((state) => state.temperaments);
 
+  useEffect(() => {
+    dispatch(getAllDogs());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllTemperaments());
+  }, []);
+
   //razas condicionadas por temp seleccionado
   const [tempSelected, setTempSelected] = useState("");
-  const conditionalNames = [];
+  let conditionalNames = [];
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1); //pagina actual (arranca en 1)
@@ -36,23 +44,15 @@ export default function Home() {
   if(currentPage !== 1 && currentPage > rounded){
     setCurrentPage(1)
   }
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   //Ordenamiento
   const [order, setOrder] = useState("");
   const [orderWeight, setOrderWeight] = useState("");
 
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  useEffect(() => {
-    dispatch(getAllDogs());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getAllTemperaments());
-  }, []);
-
+ 
   //filtrado por nombre
   function handleFilterName(e) {
     e.preventDefault(e);
@@ -84,10 +84,25 @@ export default function Home() {
     })
   }
 
-  console.log(allEveryDog);
-  console.log(conditionalNames);
+  //limpieza de filtro temperamento
+  function handleCleanFilter(e){
+    e.preventDefault();
+    if(tempSelected && typeof currentDogs !== 'string'){
+      dispatch(getAllDogs())
+      setTempSelected("");
+      clearSelected();
+    }
+  }
 
- 
+  function clearSelected(){
+    let e =  document.getElementById("temp").selectedOptions;
+
+    for(let i = 0; i < e.length; i++){
+      e[i].selected = false;
+    }
+  }
+
+
   //ordenamiento por nombre
   //evaluo el tipo de dato para que no rompa al intentar filtrar despues de una busqueda sin resultados
   function handleOrderByName(e) {
@@ -145,8 +160,8 @@ export default function Home() {
             </select>
             </div>
             {/* filtrado por raza */}
-            <select onChange={(e) => handleFilterName(e)} className = "header_orderButtons2" id={light}>
-              <option hidden>Razes</option>
+            <select onChange={(e) => handleFilterName(e)} className = "header_orderButtons2" id={light} name="races">
+              <option hidden>Races</option>
               {conditionalNames.length ? (
                 conditionalNames.map((d) => (
                     <option key={d.name} value={d.name}>
@@ -165,7 +180,7 @@ export default function Home() {
               }
             </select>
             {/* filtrado por temperamento */}
-            <select onChange={(e) => handleFilterTemperament(e)} className = "header_orderButtons">
+            <select onChange={(e) => handleFilterTemperament(e)} className = "header_orderButtons" id = "temp">
               <option hidden>Temperaments</option>
               {arr.length ? (
                 arr.map((t) => {
@@ -179,6 +194,7 @@ export default function Home() {
                 <h1>Not Results Found</h1>
               )}
             </select>
+            {tempSelected ? <button onClick={e => handleCleanFilter(e)} className = "filter_temp">X</button> : <button onClick={e => handleCleanFilter(e)} hidden = "true">x</button>}
           {/* searchBar */}
           <div>
             <SearchBar />

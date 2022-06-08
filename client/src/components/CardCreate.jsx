@@ -38,6 +38,7 @@ function DogCreate() {
   const temperaments = useSelector((state) => state.temperaments);
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
+  const [selectedTemps, setSelectedTemps] = useState([]);
   let temps = [];
 
   useEffect(() => {
@@ -96,6 +97,16 @@ function DogCreate() {
       ...input,
       temperaments: [...input.temperaments, !input.temperaments.includes(e.target.value) && e.target.value],
     });
+    setSelectedTemps([...selectedTemps, e.target.value])
+  }
+
+  //limpieza filtro temp
+  function handleCleanTemp(e){
+    e.preventDefault();
+    if(selectedTemps.length){
+      setSelectedTemps([]);
+      input.temperaments = [];
+    }
   }
 
   function handleSubmit(e) {
@@ -132,6 +143,7 @@ function DogCreate() {
       image: "",
       temperaments: [],
     })
+    setSelectedTemps([]);
   }
 
   return (
@@ -248,7 +260,7 @@ function DogCreate() {
                   </div>
                   <div className="temperament">
                     <label>Temperament*: </label>
-                    <select onChange={(e) => handleTemperaments(e)}>
+                    <select onChange={(e) => handleTemperaments(e)} id = "temps">
                       <option hidden>Select almost one</option>
                       {temperaments?.map((t) => (
                         <option key={t.id} value={t.id}>
@@ -256,6 +268,7 @@ function DogCreate() {
                         </option>
                       ))}
                     </select>
+                    {selectedTemps.length ? <button onClick ={e => handleCleanTemp(e)} className = "filter_temp">x</button> : <button hidden="true">x</button>}
                   </div>
                 </div>
               </div>

@@ -370,5 +370,31 @@ export const StyledCreate = styled.div`
         height: 150px;
     }
 
+    .filter_temp{
+        position: absolute;
+        margin-left: 17.5%;
+        margin-top: 12px;
+        border: none;
+        border-radius: 50%;
+        background-color: #fff;
+        height: 25px;
+        width: 25px;
+        font-size: 12px;
+        font-family: "Helvetica";
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover{
+            background-color: #A0522D;
+            color: white;
+        }
+
+        &:active{
+            background-color: #A0522D;
+            color: white;
+            transform: scale(1.2);
+        }
+    }
 
 `

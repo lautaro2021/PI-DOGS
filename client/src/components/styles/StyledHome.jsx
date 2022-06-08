@@ -311,5 +311,30 @@ export const StyledHome = styled.div `
         text-align: center;
         color: #fff;
     }
+
+    .filter_temp{
+        border: none;
+        text-align: center;
+        border-radius: 50%;
+        font-size: 10px;
+        font-family: 'Helvetica';
+        font-weight: bold;
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        margin-left: 62%;
+        cursor: pointer;
+        background-color: #faebd7;
+
+        &:hover{
+            background-color: #A0522D;
+            color: white;
+        }
+
+        &:active{
+            transform: scale(1.2);
+        }
+
+    }
 `
 

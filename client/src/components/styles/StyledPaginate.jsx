@@ -42,6 +42,10 @@ export const StyledPaginate = styled.nav`
             background-color: #A0522D;
             color: #FFF5EE;
         }
+
+        &:active{
+            transform: scale(1.1);
+        }
     }
 
     .li_paginado_ON{
@@ -68,6 +72,7 @@ export const StyledPaginate = styled.nav`
         font-family: "Helvetica";
         font-weight: bold;
         padding: 15px;
+
     }
 
 
