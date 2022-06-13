@@ -8,6 +8,10 @@
   <img height="200" src="./dog.png" />
 </p>
 
+## Donde ver el proyecto 
+El proyecto se encuentra deployado y activo, y puede visitarse por medio del siguiente link: https://pi-dogs-brown.vercel.app/
+
+
 ## Objetivos del Proyecto
 
 - Construir una App utlizando React, Redux, Node y Sequelize.
